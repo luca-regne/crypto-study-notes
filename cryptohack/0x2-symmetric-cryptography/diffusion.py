@@ -3,9 +3,11 @@ def shift_rows(s):
     s[0][2], s[1][2], s[2][2], s[3][2] = s[2][2], s[3][2], s[0][2], s[1][2]
     s[0][3], s[1][3], s[2][3], s[3][3] = s[3][3], s[0][3], s[1][3], s[2][3]
 
+    return s
+
 
 def inv_shift_rows(s):
-    ???
+    return shift_rows(shift_rows(shift_rows(s)))
 
 
 # learned from http://cs.ucsb.edu/~koc/cs178/projects/JT/aes.c
@@ -21,10 +23,13 @@ def mix_single_column(a):
     a[2] ^= t ^ xtime(a[2] ^ a[3])
     a[3] ^= t ^ xtime(a[3] ^ u)
 
+    return a
+
 
 def mix_columns(s):
     for i in range(4):
         mix_single_column(s[i])
+    return s
 
 
 def inv_mix_columns(s):
@@ -37,7 +42,7 @@ def inv_mix_columns(s):
         s[i][2] ^= u
         s[i][3] ^= v
 
-    mix_columns(s)
+    return mix_columns(s)
 
 
 state = [
@@ -47,3 +52,7 @@ state = [
     [94, 79, 8, 54],
 ]
 
+if __name__ == '__main__':
+    for r in inv_shift_rows(inv_mix_columns(state)):
+        for i in r:
+            print(chr(i), end="")

@@ -47,7 +47,10 @@ state = [
 def sub_bytes(s, sbox=s_box):
     return [sbox[i] for r in s for i in r]
 
-            
 
-print(''.join([chr(c) for c in sub_bytes(state, sbox=inv_s_box)]))
+def inv_sub_bytes(s, sbox=inv_s_box):
+    return [inv_s_box[i] for r in s for i in r]
 
+
+if __name__ == "__main__":
+    print("".join(inv_s_box))
