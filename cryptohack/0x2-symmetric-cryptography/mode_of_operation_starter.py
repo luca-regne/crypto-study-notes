@@ -4,7 +4,7 @@ import requests
 
 
 def request_api(endpoint: str) -> dict:
-    BASE_URL = "http://aes.cryptohack.org/ablock_cipher_starter"
+    BASE_URL = "http://aes.cryptohack.org/block_cipher_starter"
     r = requests.get(f"{BASE_URL}/{endpoint}")
 
     if r.status_code != 200:
